@@ -25,6 +25,7 @@ public class UserController {
         if(!isUserIdValid(userId)){
             throw new RestException(ErrorCode.INVALID_REQUEST_URL);
         }
+    
         return ResponseEntity.ok(userService.getUser(userId));
     }
 
@@ -33,6 +34,7 @@ public class UserController {
         if(!isUserIdValid(userId)){
             throw new RestException(ErrorCode.INVALID_REQUEST_URL);
         }
+
         return ResponseEntity.ok(userService.getUserMzList(userId));
     }
 }

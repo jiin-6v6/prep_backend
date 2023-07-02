@@ -13,6 +13,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
+    INVALID_USER_ID(HttpStatus.BAD_REQUEST, "", "Invalid User ID"),
     INVALID_REQUEST_URL(HttpStatus.BAD_REQUEST, "", "Invalid Request URL"),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "", "Internal Server Error")
     ;

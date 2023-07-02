@@ -14,14 +14,14 @@ public class UserMzListRes {
     private List<MzList> mzList;
 
     @Builder
-    public UserMzListRes(List<MzList> userMzLists){
-        boolean first = true;
+    public UserMzListRes(List<MzList> userMzLists, String userId){
+        this.userId = userId;
+        if(userMzLists == null || userMzLists.size() == 0){
+            return;
+        }
+
         mzList = new ArrayList<>();
         for (MzList userMzList : userMzLists) {
-            if(first){
-                userId = userMzList.getUserId();
-                first = false;
-            }
             mzList.add(userMzList);
         }
     }
