@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "/user/:userId/list",
+			"name": "/user/{userId}/list",
 			"item": [
 				{
 					"name": "Positive",
@@ -202,7 +202,7 @@
 			]
 		},
 		{
-			"name": "/user/:userId",
+			"name": "/user/{userId}",
 			"item": [
 				{
 					"name": "Positive",

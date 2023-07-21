@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "ccb5a611-9862-4892-a0fc-6ecb8413ab03",
+		"name": "tct_module_mzlist",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19804727"
+	},
+	"item": [
+		{
+			"name": "/mzlist/{mzListId}",
+			"item": [
+				{
+					"name": "Positive",
+					"item": [
+						{
+							"name": "맛집 리스트가 존재하고 식당 데이터가 존재하는 경우, 정상 응답 확인",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var res = pm.response.json();\r",
+											"\r",
+											"pm.test(\"response contains mzListId\", function () {\r",
+											"    pm.expect(res).to.have.property(\"mzListId\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"response contains restaurantList\", function () {\r",
+											"    pm.expect(res).to.have.property(\"restaurantList\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"restaurantList has at least one component\", function () {\r",
+											"    var restaurantList = res.restaurantList;\r",
+											"    pm.expect(restaurantList.length).to.be.greaterThan(0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/mzlist/{{existMzListIdWithRestaurants}}",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"mzlist",
+										"{{existMzListIdWithRestaurants}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "맛집 리스트가 존재하고 식당 데이터가 존재하지 않는 경우, 정상 응답 확인",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var res = pm.response.json();\r",
+											"\r",
+											"pm.test(\"response contains mzListId\", function () {\r",
+											"    pm.expect(res).to.have.property(\"mzListId\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"response contains restaurantList\", function () {\r",
+											"    pm.expect(res).to.have.property(\"restaurantList\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"mzLirestaurantListst is null\", function () {\r",
+											"    var restaurantList = res.restaurantList;\r",
+											"    pm.expect(restaurantList).to.be.null;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/mzlist/{{existMzListIdWithoutRestaurants}}",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"mzlist",
+										"{{existMzListIdWithoutRestaurants}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Negative",
+					"item": [
+						{
+							"name": "맛집 리스트가 존재하지 않는 경우, 오류 응답 확인",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"var res = pm.response.json();\r",
+											"\r",
+											"pm.test(\"response contains message\", function () {\r",
+											"    pm.expect(res).to.have.property(\"message\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"message is 'Invalid Request URL'\", function () {\r",
+											"    var message = res.message;\r",
+											"    pm.expect(message).to.be.eql(\"Invalid Request URL\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/mzlist/{{nonexistMzList}}",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"mzlist",
+										"{{nonexistMzList}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

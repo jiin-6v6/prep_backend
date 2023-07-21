@@ -14,7 +14,7 @@ public class UserMzListRes {
     private List<MzList> mzList;
 
     @Builder
-    public UserMzListRes(List<MzList> userMzLists, String userId){
+    public UserMzListRes(String userId, List<MzList> userMzLists){
         this.userId = userId;
         if(userMzLists == null || userMzLists.size() == 0){
             return;

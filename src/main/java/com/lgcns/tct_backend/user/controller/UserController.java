@@ -35,6 +35,6 @@ public class UserController {
             throw new RestException(ErrorCode.INVALID_REQUEST_URL);
         }
 
-        return ResponseEntity.ok(UserMzListRes.builder().userMzLists(userService.getUserMzList(userId)).userId(userId).build());
+        return ResponseEntity.ok(UserMzListRes.builder().userId(userId).userMzLists(userService.getUserMzList(userId)).build());
     }
 }
