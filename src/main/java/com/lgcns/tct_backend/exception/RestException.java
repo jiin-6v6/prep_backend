@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 public class RestException extends RuntimeException {
-        private ErrorCode error;
+    private ErrorCode error;
 
     public RestException(ErrorCode error){
         this.error = error;

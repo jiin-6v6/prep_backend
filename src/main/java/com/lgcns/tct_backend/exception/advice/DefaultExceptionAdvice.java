@@ -10,7 +10,7 @@ import com.lgcns.tct_backend.model.ErrorCode;
 
 @ControllerAdvice
 public class DefaultExceptionAdvice {
-        @ExceptionHandler(BusinessException.class)
+    @ExceptionHandler(BusinessException.class)
     protected ResponseEntity<ErrorCode> handleBusinessException(BusinessException e){
         ErrorCode error = e.getError();
         return new ResponseEntity<>(error, error.getHttpStatus());

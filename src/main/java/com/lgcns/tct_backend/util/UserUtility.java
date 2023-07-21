@@ -6,9 +6,9 @@ import java.util.regex.Pattern;
 
 @UtilityClass
 public class UserUtility {
-    private static final String USER_ID_REGEX = "^[a-zA-Z]{1}[a-zA-Z0-9_-]{4,19}$";
+    private static final Pattern USER_ID_REGEX = Pattern.compile("^[a-zA-Z]{1}[a-zA-Z0-9_-]{4,19}$");
 
     public static boolean isUserIdValid(String userId){
-        return Pattern.matches(USER_ID_REGEX, userId);
+        return USER_ID_REGEX.matcher(userId).matches();
     }
 }

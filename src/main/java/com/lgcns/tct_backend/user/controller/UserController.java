@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static com.lgcns.tct_backend.util.UserUtility.isUserIdValid;
 
-@RestController
 @RequiredArgsConstructor
+@RestController
 public class UserController {
     private final UserService userService;
 
@@ -35,6 +35,6 @@ public class UserController {
             throw new RestException(ErrorCode.INVALID_REQUEST_URL);
         }
 
-        return ResponseEntity.ok(userService.getUserMzList(userId));
+        return ResponseEntity.ok(UserMzListRes.builder().userMzLists(userService.getUserMzList(userId)).userId(userId).build());
     }
 }
