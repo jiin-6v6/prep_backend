@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "484155f0-b38a-4075-bacd-0d6986243d4b",
+		"name": "tct_module_user",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19804727"
+	},
+	"item": [
+		{
+			"name": "/user/:userId/list",
+			"item": [
+				{
+					"name": "Positive",
+					"item": [
+						{
+							"name": "사용자의 맛집 리스트 데이터 조회 되는 경우, 정상 응답 확인",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var res = pm.response.json();\r",
+											"\r",
+											"pm.test(\"response contains userId\", function () {\r",
+											"    pm.expect(res).to.have.property(\"userId\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"response contains mzList\", function () {\r",
+											"    pm.expect(res).to.have.property(\"mzList\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"mzList has at least one component\", function () {\r",
+											"    var mzList = res.mzList;\r",
+											"    pm.expect(mzList.length).to.be.greaterThan(0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/user/{{validAndExistUserId}}/list",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"user",
+										"{{validAndExistUserId}}",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "사용자의 맛집 리스트 데이터 조회 되지 않는 경우. 정상 응답 확인",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var res = pm.response.json();\r",
+											"\r",
+											"pm.test(\"response contains userId\", function () {\r",
+											"    pm.expect(res).to.have.property(\"userId\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"response contains mzList\", function () {\r",
+											"    pm.expect(res).to.have.property(\"mzList\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"mzList is null\", function () {\r",
+											"    var mzList = res.mzList;\r",
+											"    pm.expect(mzList).to.be.null;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/user/{{validButHaveNoListUserId}}/list",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"user",
+										"{{validButHaveNoListUserId}}",
+										"list"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Negative",
+					"item": [
+						{
+							"name": "userId가 invalid한 경우, 오류 응답 확인",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"var res = pm.response.json();\r",
+											"\r",
+											"pm.test(\"response contains message\", function () {\r",
+											"    pm.expect(res).to.have.property(\"message\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"message is 'Invalid Request URL'\", function () {\r",
+											"    var message = res.message;\r",
+											"    pm.expect(message).to.be.eql(\"Invalid Request URL\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/user/{{invalidUserId}}/list",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"user",
+										"{{invalidUserId}}",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userId가 valid하지만 존재하지 않는 경우, 오류 응답 확인",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"var res = pm.response.json();\r",
+											"\r",
+											"pm.test(\"response contains message\", function () {\r",
+											"    pm.expect(res).to.have.property(\"message\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"message is 'Invalid User ID'\", function () {\r",
+											"    var message = res.message;\r",
+											"    pm.expect(message).to.be.eql(\"Invalid User ID\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/user/{{validButNotExistUserId}}/list",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"user",
+										"{{validButNotExistUserId}}",
+										"list"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "/user/:userId",
+			"item": [
+				{
+					"name": "Positive",
+					"item": [
+						{
+							"name": "userId가 valid하고 사용자 데이터 조회 되는 경우, 정상 응답 확인",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/user/{{validAndExistUserId}}",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"user",
+										"{{validAndExistUserId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Negative",
+					"item": [
+						{
+							"name": "userId가 valid하지만 존재하지 않는 경우, 오류 응답 확인",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/user/{{validButNotExistUserId}}",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"user",
+										"{{validButNotExistUserId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userId가 invalid한 경우, 오류 응답 확인 Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/user/{{invalidUserId}}",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"user",
+										"{{invalidUserId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
