@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "/user/:userId/list",
+			"name": "/user/{userId}/mzlist",
 			"item": [
 				{
 					"name": "Positive",
@@ -46,14 +46,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{localhost}}/user/{{validAndExistUserId}}/list",
+									"raw": "{{localhost}}/user/{{validAndExistUserId}}/mzlist",
 									"host": [
 										"{{localhost}}"
 									],
 									"path": [
 										"user",
 										"{{validAndExistUserId}}",
-										"list"
+										"mzlist"
 									]
 								}
 							},
@@ -93,14 +93,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{localhost}}/user/{{validButHaveNoListUserId}}/list",
+									"raw": "{{localhost}}/user/{{validButHaveNoListUserId}}/mzlist",
 									"host": [
 										"{{localhost}}"
 									],
 									"path": [
 										"user",
 										"{{validButHaveNoListUserId}}",
-										"list"
+										"mzlist"
 									]
 								}
 							},
@@ -141,14 +141,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{localhost}}/user/{{invalidUserId}}/list",
+									"raw": "{{localhost}}/user/{{invalidUserId}}/mzlist",
 									"host": [
 										"{{localhost}}"
 									],
 									"path": [
 										"user",
 										"{{invalidUserId}}",
-										"list"
+										"mzlist"
 									]
 								}
 							},
@@ -184,14 +184,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{localhost}}/user/{{validButNotExistUserId}}/list",
+									"raw": "{{localhost}}/user/{{validButNotExistUserId}}/mzlist",
 									"host": [
 										"{{localhost}}"
 									],
 									"path": [
 										"user",
 										"{{validButNotExistUserId}}",
-										"list"
+										"mzlist"
 									]
 								}
 							},
@@ -202,7 +202,7 @@
 			]
 		},
 		{
-			"name": "/user/:userId",
+			"name": "/user/{userId}",
 			"item": [
 				{
 					"name": "Positive",

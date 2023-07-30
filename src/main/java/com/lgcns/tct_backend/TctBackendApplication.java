@@ -9,5 +9,4 @@ public class TctBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TctBackendApplication.class, args);
 	}
-
 }
