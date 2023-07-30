@@ -139,13 +139,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{localhost}}/mzlist/{{nonexistMzList}}",
+									"raw": "{{localhost}}/mzlist/{{nonExistMzList}}",
 									"host": [
 										"{{localhost}}"
 									],
 									"path": [
 										"mzlist",
-										"{{nonexistMzList}}"
+										"{{nonExistMzList}}"
 									]
 								}
 							},

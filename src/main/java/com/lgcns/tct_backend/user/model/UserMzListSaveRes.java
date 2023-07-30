@@ -10,7 +10,10 @@ public class UserMzListSaveRes {
 	private String message;
 
 	public static UserMzListSaveRes ofSuccess() {
-		return UserMzListSaveRes.builder().result("success").message("success to message").build();
+		return UserMzListSaveRes.builder()
+				.result("success")
+				.message("success to save mz list")
+				.build();
 	}
 
 	public static UserMzListSaveRes ofFail(String message) {
