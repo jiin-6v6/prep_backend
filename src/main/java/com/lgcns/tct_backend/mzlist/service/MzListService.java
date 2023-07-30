@@ -10,6 +10,6 @@ public interface MzListService {
 	public List<Restaurant> getRestaurantsInMzList(String mzListId);
 
 	public boolean checkUserMzList(String userId, String mzListName);
-	
+
 	public int addUserMzList(String userId, String mzListName);
 }

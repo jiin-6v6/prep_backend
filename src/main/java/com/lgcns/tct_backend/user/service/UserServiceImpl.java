@@ -1,5 +1,7 @@
 package com.lgcns.tct_backend.user.service;
 
+import static com.lgcns.tct_backend.constants.Constants.SUCCESS;
+
 import com.lgcns.tct_backend.exception.BusinessException;
 import com.lgcns.tct_backend.model.ErrorCode;
 import com.lgcns.tct_backend.mzlist.model.MzList;
@@ -9,8 +11,6 @@ import com.lgcns.tct_backend.user.repository.UserRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import static com.lgcns.tct_backend.constants.Constants.SUCCESS;
 
 @RequiredArgsConstructor
 @Service
@@ -38,12 +38,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String addUserMzList(String userId, String mzListName) {
-		boolean isAleadyExisted = mzListService.checkUserMzList(userId, mzListName);
+		User user = this.getUser(userId);
 
-		if(isAleadyExisted) {
+		boolean isAleadyExisted = mzListService.checkUserMzList(user.getUserId(), mzListName);
+
+		if (isAleadyExisted) {
 			return "mz list name (" + mzListName + ") is already existed.";
 		}
-		mzListService.addUserMzList(userId, mzListName);
+		mzListService.addUserMzList(user.getUserId(), mzListName);
 		return SUCCESS;
 	}
 }

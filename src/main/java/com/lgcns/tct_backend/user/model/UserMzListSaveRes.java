@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class UserMzListSaveRes {
-    	private String result;
+	private String result;
 	private String message;
 
 	public static UserMzListSaveRes ofSuccess() {

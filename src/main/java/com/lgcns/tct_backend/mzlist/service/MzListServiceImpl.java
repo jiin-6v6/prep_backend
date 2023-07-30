@@ -7,14 +7,9 @@ import com.lgcns.tct_backend.mzlist.model.MzListCond;
 import com.lgcns.tct_backend.mzlist.repository.MzListRepository;
 import com.lgcns.tct_backend.restaurant.model.Restaurant;
 import java.util.List;
-import java.util.UUID;
-
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.stereotype.Service;
 
-@Slf4j
 @RequiredArgsConstructor
 @Service
 public class MzListServiceImpl implements MzListService {
@@ -44,6 +39,7 @@ public class MzListServiceImpl implements MzListService {
 
 	@Override
 	public int addUserMzList(String userId, String mzListName) {
-		return mzListRepository.insertUserMzList(MzListCond.builder().userId(userId).mzListName(mzListName).build());
+		return mzListRepository.insertUserMzList(
+				MzListCond.builder().userId(userId).mzListName(mzListName).build());
 	}
 }
