@@ -26,7 +26,7 @@
         ]]>
     </select>
 
-        <select id="selectRestaurantInMzList" parameterType="String" resultType="Restaurant">
+    <select id="selectRestaurantInMzList" parameterType="String" resultType="Restaurant">
         <![CDATA[
             SELECT  /* mzlist.selectRestaurantInMzList */
                     A.RESTAURANT_ID,
@@ -39,4 +39,30 @@
              WHERE  B.LIST_ID = #{mzListId}
         ]]>
     </select>
+
+    <select id="selectUserMzListWithMzListName" parameterType="MzListCond" resultType="boolean">
+        <![CDATA[
+            SELECT  /* mzlist.selectUserMzListWithMzListName */
+            EXISTS (SELECT  LIST_ID
+                      FROM  TB_MZ_LIST
+                     WHERE  USER_ID = #{userId}
+                       AND  LIST_NAME = #{mzListName}
+            )
+        ]]>
+    </select>
+
+    <insert id="insertUserMzList" parameterType="MzListCond">
+        <![CDATA[
+            INSERT  /* mzlist.insertUserMzList */
+              INTO  TB_MZ_LIST
+                    (LIST_ID,
+                    USER_ID,
+                    LIST_NAME,
+                    CREATED_DATE)
+            VALUES  (UUID(),
+                    #{userId},
+                    #{mzListName},
+                    DATE_FORMAT(NOW(), '%Y%m%d'))
+        ]]>
+    </insert>
 </mapper>

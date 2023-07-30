@@ -8,4 +8,6 @@ public interface UserService {
 	public User getUser(String userId);
 
 	public List<MzList> getUserMzList(String userId);
+
+	public String addUserMzList(String userId, String mzListName);
 }

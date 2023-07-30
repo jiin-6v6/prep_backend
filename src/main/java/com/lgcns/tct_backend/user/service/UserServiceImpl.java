@@ -10,6 +10,8 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import static com.lgcns.tct_backend.constants.Constants.SUCCESS;
+
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,5 +34,16 @@ public class UserServiceImpl implements UserService {
 	public List<MzList> getUserMzList(String userId) {
 		User user = this.getUser(userId);
 		return mzListService.getUserMzList(user.getUserId());
+	}
+
+	@Override
+	public String addUserMzList(String userId, String mzListName) {
+		boolean isAleadyExisted = mzListService.checkUserMzList(userId, mzListName);
+
+		if(isAleadyExisted) {
+			return "mz list name (" + mzListName + ") is already existed.";
+		}
+		mzListService.addUserMzList(userId, mzListName);
+		return SUCCESS;
 	}
 }

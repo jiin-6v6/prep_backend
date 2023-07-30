@@ -22,6 +22,12 @@ spring:
     password: TheGreatestStudy220129!!
     baseline-on-migrate: true
 
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+
 logging:
   level:
     root: info
