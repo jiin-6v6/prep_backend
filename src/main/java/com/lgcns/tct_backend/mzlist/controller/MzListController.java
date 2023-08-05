@@ -1,6 +1,7 @@
 package com.lgcns.tct_backend.mzlist.controller;
 
 import com.lgcns.tct_backend.mzlist.model.MzListRes;
+import com.lgcns.tct_backend.mzlist.model.MzListRestaurantRes;
 import com.lgcns.tct_backend.mzlist.service.MzListService;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,19 @@ public class MzListController {
 		return ResponseEntity.ok(
 				MzListRes.builder()
 						.mzListId(mzListId)
-						.restaurants(mzListService.getRestaurantsInMzList(mzListId))
+						.restaurants(mzListService.getRestaurantListInMzList(mzListId))
+						.build());
+	}
+
+	@GetMapping("mzlist/{mzListId}/restaurant")
+	public ResponseEntity<MzListRestaurantRes> getMzListWithRestaurant(
+			@PathVariable(name = "mzListId") @NotBlank String mzListId) {
+		return ResponseEntity.ok(
+				MzListRestaurantRes.builder()
+						.mzListId(mzListId)
+						.restaurantListInMzList(mzListService.getRestaurantListInMzList(mzListId))
+						.restaurantListNotInMzList(
+								mzListService.getRestaurantListNotInMzList(mzListId))
 						.build());
 	}
 

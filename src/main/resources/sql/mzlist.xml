@@ -26,20 +26,6 @@
         ]]>
     </select>
 
-    <select id="selectRestaurantInMzList" parameterType="String" resultType="Restaurant">
-        <![CDATA[
-            SELECT  /* mzlist.selectRestaurantInMzList */
-                    A.RESTAURANT_ID,
-                    A.RESTAURANT_NAME,
-                    A.RESTAURANT_ADDRESS,
-                    A.RESTAURANT_CATEGORY
-              FROM  TB_RESTAURANT A
-              JOIN  TB_MZ_LIST_RESTAURANT_REL B
-                ON  A.RESTAURANT_ID = B.RESTAURANT_ID 
-             WHERE  B.LIST_ID = #{mzListId}
-        ]]>
-    </select>
-
     <select id="selectUserMzListWithMzListName" parameterType="MzListCond" resultType="boolean">
         <![CDATA[
             SELECT  /* mzlist.selectUserMzListWithMzListName */
