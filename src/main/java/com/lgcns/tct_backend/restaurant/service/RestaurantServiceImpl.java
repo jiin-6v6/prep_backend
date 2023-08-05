@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
-	private RestaurantRepository restaurantRepository;
+	private final RestaurantRepository restaurantRepository;
 
 	@Override
 	public List<Restaurant> getRestaurantListInMzList(String mzListId) {
