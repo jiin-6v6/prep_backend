@@ -14,4 +14,6 @@ public interface MzListService {
 	public boolean checkUserMzList(String userId, String mzListName);
 
 	public int addUserMzList(String userId, String mzListName);
+
+	public String editMzList(String mzListId, List<String> restaurantIdList);
 }
