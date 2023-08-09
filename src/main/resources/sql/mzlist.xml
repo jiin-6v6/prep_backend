@@ -26,17 +26,66 @@
         ]]>
     </select>
 
-        <select id="selectRestaurantInMzList" parameterType="String" resultType="Restaurant">
+    <select id="selectUserMzListWithMzListName" parameterType="MzListCond" resultType="boolean">
         <![CDATA[
-            SELECT  /* mzlist.selectRestaurantInMzList */
-                    A.RESTAURANT_ID,
-                    A.RESTAURANT_NAME,
-                    A.RESTAURANT_ADDRESS,
-                    A.RESTAURANT_CATEGORY
-              FROM  TB_RESTAURANT A
-              JOIN  TB_MZ_LIST_RESTAURANT_REL B
-                ON  A.RESTAURANT_ID = B.RESTAURANT_ID 
-             WHERE  B.LIST_ID = #{mzListId}
+            SELECT  /* mzlist.selectUserMzListWithMzListName */
+            EXISTS (SELECT  LIST_ID
+                      FROM  TB_MZ_LIST
+                     WHERE  USER_ID = #{userId}
+                       AND  LIST_NAME = #{mzListName}
+            )
         ]]>
     </select>
+
+    <insert id="insertUserMzList" parameterType="MzListCond">
+        <![CDATA[
+            INSERT  /* mzlist.insertUserMzList */
+              INTO  TB_MZ_LIST
+                    (LIST_ID,
+                    USER_ID,
+                    LIST_NAME,
+                    CREATED_DATE)
+            VALUES  (UUID(),
+                    #{userId},
+                    #{mzListName},
+                    DATE_FORMAT(NOW(), '%Y%m%d'))
+        ]]>
+    </insert>
+
+    <delete id="deleteAllRestaurantMzList" parameterType="String">
+        <![CDATA[
+            DELETE  /* mzlist.deleteAllRestaurantMzList */
+              FROM  TB_MZ_LIST_RESTAURANT_REL
+             WHERE  LIST_ID = #{mzListId}
+        ]]>
+    </delete>
+
+    <delete id="deleteRestaurantMzList" parameterType="MzListRestaurantCond">
+        <![CDATA[
+            DELETE  /* mzlist.deleteRestaurantMzList */
+              FROM  TB_MZ_LIST_RESTAURANT_REL
+             WHERE  LIST_ID = #{mzListId}
+               AND  RESTAURANT_ID NOT IN
+        ]]>
+            <foreach collection="restaurantIdList" item="restaurantId" open="(" close=")" separator=",">
+                #{restaurantId}
+            </foreach>
+    </delete>
+
+    <insert id="insertRestaurantMzList" parameterType="MzListRestaurantRelCond">
+        <![CDATA[
+            INSERT  /* mzlist.insertRestaurantMzList */
+              INTO  TB_MZ_LIST_RESTAURANT_REL
+                    (
+                    RESTAURANT_LIST_REL_ID,
+                    RESTAURANT_ID,
+                    LIST_ID
+                    )
+            VALUES  (
+                    UUID(),
+                    #{restaurantId},
+                    #{mzListId}
+                    )
+        ]]>
+    </insert>
 </mapper>

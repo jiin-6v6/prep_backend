@@ -1,5 +1,7 @@
 package com.lgcns.tct_backend.user.service;
 
+import static com.lgcns.tct_backend.constants.Constants.SUCCESS;
+
 import com.lgcns.tct_backend.exception.BusinessException;
 import com.lgcns.tct_backend.model.ErrorCode;
 import com.lgcns.tct_backend.mzlist.model.MzList;
@@ -32,5 +34,18 @@ public class UserServiceImpl implements UserService {
 	public List<MzList> getUserMzList(String userId) {
 		User user = this.getUser(userId);
 		return mzListService.getUserMzList(user.getUserId());
+	}
+
+	@Override
+	public String addUserMzList(String userId, String mzListName) {
+		User user = this.getUser(userId);
+
+		boolean isAleadyExisted = mzListService.checkUserMzList(user.getUserId(), mzListName);
+
+		if (isAleadyExisted) {
+			return "mz list name (" + mzListName + ") is already existed.";
+		}
+		mzListService.addUserMzList(user.getUserId(), mzListName);
+		return SUCCESS;
 	}
 }

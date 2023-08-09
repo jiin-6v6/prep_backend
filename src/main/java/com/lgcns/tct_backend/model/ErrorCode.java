@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatusCode;
 public enum ErrorCode {
 	INVALID_USER_ID(HttpStatus.BAD_REQUEST, "", "Invalid User ID"),
 	INVALID_REQUEST_URL(HttpStatus.BAD_REQUEST, "", "Invalid Request URL"),
+	INVALID_REQUEST_BODY(HttpStatus.BAD_REQUEST, "", "Invalid Request BODY"),
 	INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "", "Internal Server Error");
 
 	private HttpStatusCode httpStatus;

@@ -7,5 +7,13 @@ import java.util.List;
 public interface MzListService {
 	public List<MzList> getUserMzList(String userId);
 
-	public List<Restaurant> getRestaurantsInMzList(String mzListId);
+	public List<Restaurant> getRestaurantListInMzList(String mzListId);
+
+	public List<Restaurant> getRestaurantListNotInMzList(String mzListId);
+
+	public boolean checkUserMzList(String userId, String mzListName);
+
+	public int addUserMzList(String userId, String mzListName);
+
+	public String editMzList(String mzListId, List<String> restaurantIdList);
 }
